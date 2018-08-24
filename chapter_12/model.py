@@ -89,6 +89,7 @@ class CharRNN:
     def build_loss(self):
         with tf.name_scope('loss'):
             y_one_hot = tf.one_hot(self.targets, self.num_classes)
+            # 将target转化为字典大小的向量
             y_reshaped = tf.reshape(y_one_hot, self.logits.get_shape())
             loss = tf.nn.softmax_cross_entropy_with_logits(logits=self.logits, labels=y_reshaped)
             self.loss = tf.reduce_mean(loss)
